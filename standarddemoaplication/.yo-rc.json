@@ -1,0 +1,39 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mycompany.standarddemoapplication"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "microservice",
+    "baseName": "standarddemoaplication",
+    "packageName": "com.mycompany.standarddemoapplication",
+    "packageFolder": "com/mycompany/standarddemoapplication",
+    "serverPort": "8081",
+    "authenticationType": "uaa",
+    "uaaBaseName": "standarduaa",
+    "cacheProvider": "redis",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mariadb",
+    "prodDatabaseType": "mariadb",
+    "searchEngine": "elasticsearch",
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "MDEwODA2NWRiYWU1OTkwNmQwNjY0M2E1ZDQ4MTcwYzg0ZmNjZDY1NTRlMzI1ZjlmOGY3M2QyYzdlYjVjYTQ0NTc5MWNhMDFiMzI0OTc4NzZmNWVkYjBjZDllMWY3ZDk4MmY3Y2YwZTE3NDE2YWY0MmZhZGI2ZmQ5OGUxMTE5ODU=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1586150503309,
+    "testFrameworks": ["gatling", "cucumber"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true,
+    "skipUserManagement": true
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mycompany.standarduaa"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "uaa",
+    "baseName": "standarduaa",
+    "packageName": "com.mycompany.standarduaa",
+    "packageFolder": "com/mycompany/standarduaa",
+    "serverPort": "9999",
+    "authenticationType": "uaa",
+    "cacheProvider": "redis",
+    "enableHibernateCache": true,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "mariadb",
+    "prodDatabaseType": "mariadb",
+    "searchEngine": false,
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "Y2U2YWVjYjQ3ODc4MzE1NjE0NGQ5YmQzMGNiMjlkNGU5MDI4NWM1N2MwZjUxNTllYWU0NDRmZWI2YmM4ODQ1NTY0YjEyOWMwYjEyYTRkODZlYWZkZTc4N2E2YWYyMWE5NGMwYzg3OGI3YzFmMzgyNzhkNzhhYzg2MGE5MTVhMGY=",
+    "embeddableLaunchScript": false,
+    "creationTimestamp": 1586150338336,
+    "testFrameworks": ["cucumber"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "clientPackageManager": "npm",
+    "blueprints": [],
+    "skipClient": true
+  }
+}

@@ -1,0 +1,137 @@
+version: '2.2'
+services:
+  standarddemoaplication:
+    image: standarddemoaplication
+    scale: 1
+    ports:
+      - '8081:8081'
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=dev,swagger,zipkin'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+      - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+      - 'SPRING_DATASOURCE_URL=jdbc:mariadb://standarddemoaplication-mariadb:3306/standarddemoaplication'
+      - 'JHIPSTER_CACHE_REDIS_SERVER=redis://standarddemoaplication-redis:6379'
+      - JHIPSTER_SLEEP=120
+      - 'SPRING_DATA_JEST_URI=http://standarddemoaplication-elasticsearch:9200'
+      - 'SPRING_ELASTICSEARCH_REST_URIS=http://standarddemoaplication-elasticsearch:9200'
+      - 'KAFKA_BOOTSTRAPSERVERS=kafka:9092'
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+  standarddemoaplication-mariadb:
+    image: 'mariadb:10.4.12'
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=standarddemoaplication
+    ports:
+      - '3306:3306'
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+  standarddemoaplication-elasticsearch:
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:6.8.6'
+    environment:
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - discovery.type=single-node
+  standarddemoaplication-redis:
+    image: 'redis:5.0.7'
+
+  standardgateway:
+    image: standardgateway
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=dev,swagger,zipkin'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+      - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+      - 'SPRING_DATASOURCE_URL=jdbc:mariadb://standardgateway-mariadb:3306/standardgateway'
+      - 'JHIPSTER_CACHE_REDIS_SERVER=redis://standardgateway-redis:6379'
+      - JHIPSTER_SLEEP=120
+      - 'SPRING_DATA_JEST_URI=http://standardgateway-elasticsearch:9200'
+      - 'SPRING_ELASTICSEARCH_REST_URIS=http://standardgateway-elasticsearch:9200'
+      - 'KAFKA_BOOTSTRAPSERVERS=kafka:9092'
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+    ports:
+      - '8080:8080'
+  standardgateway-mariadb:
+    image: 'mariadb:10.4.12'
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=standardgateway
+    ports:
+      - '3302:3306'
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+  standardgateway-elasticsearch:
+    image: 'docker.elastic.co/elasticsearch/elasticsearch:6.8.6'
+    environment:
+      - ES_JAVA_OPTS=-Xms1024m -Xmx1024m
+      - discovery.type=single-node
+  standardgateway-redis:
+    image: 'redis:5.0.7'
+
+  standarduaa:
+    image: standarduaa
+    environment:
+      - _JAVA_OPTIONS=-Xmx512m -Xms256m
+      - 'SPRING_PROFILES_ACTIVE=dev,swagger,zipkin'
+      - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
+      - 'EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka'
+      - 'SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config'
+      - 'SPRING_DATASOURCE_URL=jdbc:mariadb://standarduaa-mariadb:3306/standarduaa'
+      - 'JHIPSTER_CACHE_REDIS_SERVER=redis://standarduaa-redis:6379'
+      - JHIPSTER_SLEEP=120
+      - 'KAFKA_BOOTSTRAPSERVERS=kafka:9092'
+      - JHIPSTER_REGISTRY_PASSWORD=admin
+  standarduaa-mariadb:
+    image: 'mariadb:10.4.12'
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=standarduaa
+    ports:
+      - '3301:3306'
+    command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+  standarduaa-redis:
+    image: 'redis:5.0.7'
+
+  zookeeper:
+    extends:
+      file: kafka.yml
+      service: zookeeper
+  kafka:
+    extends:
+      file: kafka.yml
+      service: kafka
+  jhipster-registry:
+    extends:
+      file: jhipster-registry.yml
+      service: jhipster-registry
+
+  jhipster-elasticsearch:
+    extends:
+      file: jhipster-console.yml
+      service: jhipster-elasticsearch
+  jhipster-logstash:
+    extends:
+      file: jhipster-console.yml
+      service: jhipster-logstash
+    depends_on:
+      - jhipster-elasticsearch
+  jhipster-console:
+    extends:
+      file: jhipster-console.yml
+      service: jhipster-console
+    depends_on:
+      - jhipster-elasticsearch
+  jhipster-import-dashboards:
+    extends:
+      file: jhipster-console.yml
+      service: jhipster-import-dashboards
+    depends_on:
+      - jhipster-elasticsearch
+  jhipster-zipkin:
+    extends:
+      file: jhipster-console.yml
+      service: jhipster-zipkin
+    depends_on:
+      - jhipster-elasticsearch
