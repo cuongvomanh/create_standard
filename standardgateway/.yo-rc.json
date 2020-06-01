@@ -1,0 +1,40 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.mycompany.standardgateway"
+    },
+    "jhipsterVersion": "6.7.1",
+    "applicationType": "gateway",
+    "baseName": "standardgateway",
+    "packageName": "com.mycompany.standardgateway",
+    "packageFolder": "com/mycompany/standardgateway",
+    "serverPort": "8080",
+    "authenticationType": "uaa",
+    "uaaBaseName": "standarduaa",
+    "cacheProvider": "redis",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "mariadb",
+    "prodDatabaseType": "mariadb",
+    "searchEngine": "elasticsearch",
+    "messageBroker": "kafka",
+    "serviceDiscoveryType": "eureka",
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1586150758802,
+    "testFrameworks": ["gatling", "cucumber", "protractor"],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
